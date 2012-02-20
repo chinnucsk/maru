@@ -7,7 +7,7 @@
 %% Emacs-friendly error_logger messages.
 %% These macros generate emacs-clickable lines of text.
 -define(ILOG(Atoms, Message, Args),
-        maru_idioms:Atoms(?FILE, ?LINE, format(Message, Args))).
+        maru_idioms:Atoms(?MODULE, ?LINE, format(Message, Args))).
 -define(INFO(Message, Args),
         ?ILOG(log_info, Message, Args)).
 -define(WARN(Message, Args),
@@ -15,9 +15,9 @@
 -define(ERROR(Message, Args),
         ?ILOG(log_error, Message, Args)).
 
--define(INFO(Message), maru_idioms:log_info(?FILE, ?LINE, Message)).
--define(WARN(Message), maru_idioms:log_warn(?FILE, ?LINE, Message)).
--define(ERROR(Message), maru_idioms:log_error(?FILE, ?LINE, Message)).
+-define(INFO(Message), maru_idioms:log_info(?MODULE, ?LINE, Message)).
+-define(WARN(Message), maru_idioms:log_warn(?MODULE, ?LINE, Message)).
+-define(ERROR(Message), maru_idioms:log_error(?MODULE, ?LINE, Message)).
 
 -define(FUN(Body), fun() ->
                            Body
