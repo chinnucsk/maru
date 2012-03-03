@@ -4,7 +4,9 @@
 {application, maru,
   [{description, "Maru Erlang web application framework scripts"},
    {vsn, "0.1.0"},
-   {modules, [maru]},
+   {modules, [maru,
+              maru_create_model,
+              maru_utils]},
    {registered,[]},
    {applications, [kernel, stdlib, sgte]},
    {start_phases, []}]}.

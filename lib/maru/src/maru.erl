@@ -22,49 +22,53 @@
 %%--------------------------------------------------------------------
 main(_Args) ->
     create_project("test_project", "tp"),
+    create_model("tp", "newmodel"),
     ok.
+
+create_model(AppPrefix, ModelName) ->
+    maru_create_model:create(AppPrefix, ModelName).
 
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
 
 create_project(ProjectName, AppPrefix) ->
-    create_dirs(project, ProjectName, AppPrefix),    
+    create_dirs(project, ProjectName, AppPrefix),
+    create_config(ProjectName, AppPrefix),
     create_app_files(ProjectName, AppPrefix),
     create_source_files(ProjectName, AppPrefix),
     create_start_script(ProjectName, AppPrefix).
+
+create_config(ProjectName, AppPrefix) ->
+    maru_utils:write_template(build_config, [{project_name, ProjectName},
+                                             {project_prefix, AppPrefix},
+                                             {project_version, "0.0.1"}],
+                              filename:join(ProjectName, "sinan.config")).
 
 create_app_files(ProjectName, AppPrefix) ->
     [create_app_file(Type, ProjectName, AppPrefix) ||
         Type <- [core, db, models, web]]. %%ops, functional_test]].
 
 create_app_file(core, ProjectName, AppPrefix) ->
-    Modules = [list_to_atom(AppPrefix++"_core_sup"),
-               list_to_atom(AppPrefix++"_core_app"),
-               list_to_atom(AppPrefix++"_core")],
     Deps = [list_to_atom(AppPrefix++"_models"), list_to_atom(AppPrefix++"_ops")],
-    create_app_file("core", ProjectName, AppPrefix, Modules, Deps);
+    create_app_file("core", ProjectName, AppPrefix, Deps);
 create_app_file(db, ProjectName, AppPrefix) ->
-    Modules = [AppPrefix++"_db"],
     Deps = [maru_idioms, maru_db],
-    create_app_file("db", ProjectName, AppPrefix, Modules, Deps);
+    create_app_file("db", ProjectName, AppPrefix, Deps);
 create_app_file(models, ProjectName, AppPrefix) ->
-    Modules = [list_to_atom(AppPrefix++"_models")],
     Deps = [sasl, maru_models],
-    create_app_file("models", ProjectName, AppPrefix, Modules, Deps);
+    create_app_file("models", ProjectName, AppPrefix, Deps);
 create_app_file(web, ProjectName, AppPrefix) ->
-    Modules = [list_to_atom(AppPrefix++"_web")],
-    Deps = [ssl, maru_web, maru_mail, AppPrefix++"_models"],
-    create_app_file("web", ProjectName, AppPrefix, Modules, Deps).
+    Deps = [ssl, maru_web, maru_mail, list_to_atom(AppPrefix++"_models")],
+    create_app_file("web", ProjectName, AppPrefix, Deps).
 
-
-create_app_file(Type, ProjectName, AppPrefix, Modules, Deps) ->
+create_app_file(Type, ProjectName, AppPrefix, Deps) ->
     FileName = filename:join([ProjectName, "lib",                              
-                              [AppPrefix, "_", Type], "ebin", [AppPrefix, "_", Type, ".app"]]),
-    write_template("base.app", [{project_name, ProjectName},
-                                {modules, io_lib:format("~p", [Modules])},
+                              [AppPrefix, "_", Type], "src", [AppPrefix, "_", Type, ".app.src"]]),
+    maru_utils:write_template(app, [{project_name, ProjectName},
+                                {modules, "[]"},
                                 {registered, ProjectName++"_sup"},
-                                {deps, io_lib:format("~p", [Deps])},
+                                {deps, string:join([atom_to_list(D) || D <- Deps], ", ")},
                                 {app_prefix, AppPrefix}], FileName).
 
 create_source_files(_ProjectName, _AppPrefix) ->
@@ -73,13 +77,6 @@ create_source_files(_ProjectName, _AppPrefix) ->
 create_start_script(_ProjectName, _AppPrefix) ->
     ok.
 
-write_template(TemplateFile, Variables, FileName) ->
-    PrivDir = "/home/tristan/Devel/maru/lib/maru/priv", %code:priv_dir(?MODULE),
-    {ok, Binary} = file:read_file(filename:join(PrivDir, TemplateFile)),
-    {ok, Template} = sgte:compile(Binary),
-    AppFile = sgte:render_bin(Template, Variables),
-    file:write_file(FileName, AppFile).
-
 create_dirs(project, ProjectName, AppPrefix) ->
     create_dir(["./", ProjectName]),
     lists:foreach(fun(DirName) ->
@@ -87,8 +84,10 @@ create_dirs(project, ProjectName, AppPrefix) ->
                   end, ["bin", "config" | lib_dirs(AppPrefix)]).   
 
 create_dir(Path) ->
-    filelib:ensure_dir(filename:join(Path)).
+    DirPath = filename:join(Path),
+    filelib:ensure_dir(DirPath),
+    file:make_dir(DirPath).
 
 lib_dirs(AppPrefix) ->
-    [filename:join(["lib", [AppPrefix, "_", X], Y])  || X <- ["core", "db", "models", "ops", "web", "functional_test"], Y <- ["ebin", "include", "priv", "src"]].
+    [filename:join(["lib", [AppPrefix, "_", X], Y])  || X <- ["core", "db", "models", "ops", "web", "functional_test"], Y <- ["ebin/", "include/", "priv/", "src/"]].
     
