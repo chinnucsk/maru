@@ -21,6 +21,7 @@
 %% @end
 %%--------------------------------------------------------------------
 main(_Args) ->
+    start_deps(),
     create_project("test_project", "tp"),
     create_model("tp", "newmodel"),
     ok.
@@ -39,7 +40,8 @@ create_project(ProjectName, AppPrefix) ->
     create_sys_config(ProjectName),
     create_app_files(ProjectName, AppPrefix),
     create_source_files(ProjectName, AppPrefix),
-    create_start_script(ProjectName, AppPrefix).
+    create_start_script(ProjectName, AppPrefix),
+    maru_priv:install_priv(ProjectName).
 
 create_build_config(ProjectName, AppPrefix) ->
     maru_utils:write_template(build_config, [{project_name, ProjectName},
@@ -51,7 +53,7 @@ create_run_script(ProjectName, AppPrefix) ->
     maru_utils:write_template(run_script, [{project_name, ProjectName},
                                            {project_prefix, AppPrefix},
                                            {project_version, "0.0.1"}],
-                              filename:join(ProjectName, "bin", ProjectName)).
+                              filename:join([ProjectName, "bin", ProjectName])).
 
 create_sys_config(ProjectName) ->
     maru_utils:write_template(sysconfig, [{project_name, ProjectName}],
@@ -103,3 +105,8 @@ create_dir(Path) ->
 lib_dirs(AppPrefix) ->
     [filename:join(["lib", [AppPrefix, "_", X], Y])  || X <- ["core", "db", "models", "ops", "web", "functional_test"], Y <- ["ebin/", "include/", "priv/", "src/"]].
     
+start_deps() ->
+    ok = application:start(crypto),
+    ok = application:start(public_key),
+    ok = application:start(ssl),
+    ok = application:start(inets).    

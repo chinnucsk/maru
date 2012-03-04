@@ -40,25 +40,25 @@ model() ->
 run_script() ->
     ["#!/bin/sh"
      "\n"
-     "PROG=$0"
-     "PROG_DIR=$(cd `dirname $0`; pwd)"
-     "test -h $0 && PROG=$(readlink $0)"
-     "export ROOTDIR=$(dirname $PROG_DIR)/_build"
+     "PROG=$$0"
+     "PROG_DIR=$$(cd `dirname $$0`; pwd)"
+     "test -h $$0 && PROG=$$(readlink $$0)"
+     "export ROOTDIR=$$(dirname $$PROG_DIR)/_build"
      "\n"
      "#### Fill in values for these variables ####"
      "REL_NAME=$project_name$"
      "REL_VSN=$project_version$"
      "###########################################"
      "\n"
-     "export BINDIR=$ERTS_DIR/bin"
+     "export BINDIR=$$ERTS_DIR/bin"
      "export EMU=beam"
      "export PROGNAME=erl"
-     "export LD_LIBRARY_PATH=$ERTS_DIR/lib"
+     "export LD_LIBRARY_PATH=$$ERTS_DIR/lib"
      "\n"
-     "export REL_DIR=$ROOTDIR/$REL_NAME/releases/$REL_VSN"
-     "MNESIA_DIR=$HOME/mnesia_data"
+     "export REL_DIR=$$ROOTDIR/$$REL_NAME/releases/$$REL_VSN"
+     "MNESIA_DIR=$$HOME/mnesia_data"
      "\n"
-     "$BINDIR/erl -sname $project_prefix$ -config $REL_DIR/sys.config -boot $REL_DIR/$REL_NAME -prefix $ROOTDIR -mnesia dir `echo \'$HOME/mnesia_data\'`"].
+     "$$BINDIR/erl -sname $project_prefix$ -config $$REL_DIR/sys.config -boot $$REL_DIR/$$REL_NAME -prefix $$ROOTDIR -mnesia dir `echo \'$$HOME/mnesia_data\'`"].
 
 
 %% @doc Writes out a overview.edoc to the filename provided.
