@@ -35,6 +35,7 @@ create_model(AppPrefix, ModelName) ->
 create_project(ProjectName, AppPrefix) ->
     create_dirs(project, ProjectName, AppPrefix),
     create_build_config(ProjectName, AppPrefix),
+    create_run_script(ProjectName, AppPrefix),
     create_sys_config(ProjectName),
     create_app_files(ProjectName, AppPrefix),
     create_source_files(ProjectName, AppPrefix),
@@ -45,6 +46,12 @@ create_build_config(ProjectName, AppPrefix) ->
                                              {project_prefix, AppPrefix},
                                              {project_version, "0.0.1"}],
                               filename:join(ProjectName, "sinan.config")).
+
+create_run_script(ProjectName, AppPrefix) ->
+    maru_utils:write_template(run_script, [{project_name, ProjectName},
+                                           {project_prefix, AppPrefix},
+                                           {project_version, "0.0.1"}],
+                              filename:join(ProjectName, "bin", ProjectName)).
 
 create_sys_config(ProjectName) ->
     maru_utils:write_template(sysconfig, [{project_name, ProjectName}],
