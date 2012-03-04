@@ -1,0 +1,397 @@
+@charset "utf-8";
+* {
+  margin: 0px;
+  padding: 0px;
+}
+a {
+  text-decoration: none;
+}
+img {
+  border: none;
+}
+html {
+  height: 100%;
+}
+body {
+  color: #093e47;
+  /*line-height:22px;*/
+
+  height: 100%;
+}
+#wrap {
+  min-height: 100%;
+}
+/*
+.topbar input[type=text] {
+  padding: 12px, 9px !important;
+}
+
+input[type=text] {
+  padding: 12px 4px !important;
+}
+
+input[type=password] {
+  padding: 12px 4px !important;
+}
+
+input[type=email] {
+  padding: 12px 4px !important;
+}
+*/
+#large_header {
+  height: 426px;
+  float: left;
+  backgroundnd-color: #9EBBDA;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #9ebbda), color-stop(0, #ffffff));
+  width: 100%;
+}
+#large_header #header_in {
+  height: 371px;
+  width: 960px;
+  padding: 0px 0px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 55px;
+}
+#small_header {
+  height: 185px;
+  float: left;
+  backgroundnd-color: #9EBBDA;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #9ebbda), color-stop(0, #ffffff));
+  width: 100%;
+}
+#small_header #header_in {
+  height: 130px;
+  width: 960px;
+  padding: 0px 0px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 55px;
+}
+.content {
+  float: left;
+  width: 100%;
+  padding-bottom: 140px;
+  overflow: auto;
+}
+.content_in {
+  width: 960px;
+  margin: 0px auto;
+  padding: 0px;
+}
+.content_heading {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  float: left;
+}
+.line {
+  width: 100%;
+  text-align: center;
+  color: #d4d4d4;
+  font-size: 12px;
+  margin: 0px 0px 10px 0px;
+  float: left;
+}
+.content_main {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+}
+.main_left {
+  width: 620px;
+  float: left;
+}
+.main_left h2 {
+  font-size: 22px;
+}
+.main_left p {
+  font-size: 14px;
+  color: #4f4f4f;
+  line-height: 24px;
+}
+.text_hr {
+  float: left;
+}
+.text_hr h2 {
+  margin: 0px 0px 10px 0px;
+}
+.text_var {
+  float: left;
+  margin: 20px 0px 20px 0px;
+}
+.text_var_left {
+  float: left;
+  width: 250px;
+}
+.text_var_left p {
+  font-size: 14px;
+  margin: 8px 0px 0px 0px;
+}
+.text_var_middle {
+  float: left;
+  width: 1px;
+  height: 167px;
+  background-color: #000;
+  margin: 5px 0px 0px 0px;
+}
+.text_var_right {
+  float: left;
+  width: 250px;
+  margin: 0px 0px 0px 60px;
+}
+.text_var_right p {
+  font-size: 14px;
+  margin: 8px 0px 0px 0px;
+}
+.gray {
+  color: #4f4f4f;
+  font-weight: bold;
+}
+.graytwo {
+  color: #093e47;
+  font-weight: bold;
+}
+.companies_logos {
+  float: left;
+}
+.main_right {
+  width: 329px;
+  float: left;
+  /* background-color:#ececec; */
+
+  border: 1px solid #b4b4b4;
+  padding: 0px 0px 40px 0px;
+  margin: 0px 0px 0px 5px;
+}
+.main_right h4 {
+  color: #3e3e3e;
+  font-size: 17px;
+  margin: 18px 0px 0px 5px;
+}
+.people {
+  float: left;
+  margin: 25px 0px 0px 0px;
+  padding: 0px 0px 0px 5px;
+}
+.people h5 {
+  font-size: 14px;
+  color: #093e47;
+  letter-spacing: 1px;
+  margin: 0px 0px 10px 0px;
+}
+.people p {
+  font-size: 12px;
+  color: #093e47;
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin: 0px;
+}
+.people img {
+  float: left;
+  margin: 5px 5px 0px 0px;
+}
+.footer {
+  float: left;
+  position: relative;
+  bottom: 0;
+  margin-top: -140px;
+  height: 140px;
+  width: 100%;
+  background-color: #323232;
+  clear: both;
+}
+.footer_in {
+  margin: 0px auto;
+  padding: 0px;
+  width: 960px;
+}
+.top_foot {
+  float: left;
+  width: 960px;
+  height: 130px;
+  text-align: center;
+  line-height: 110px;
+  color: #FFFFFF;
+  background: url(/images/footer_top.jpg);
+}
+.bottom_foot {
+  float: left;
+  width: 960px;
+}
+.footer_text {
+  width: 120px;
+  color: #FFFFFF;
+  padding: 0px 0px 0px 25px;
+  font-size: 12px;
+  line-height: 24px;
+  float: left;
+}
+.footer_text a {
+  color: #FFFFFF;
+}
+.footer_text a:hover {
+  text-decoration: underline;
+}
+.social {
+  float: left;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 23px;
+}
+.social img {
+  margin: 5px 4px 0px 4px;
+}
+.top_header {
+  width: 960px;
+  height: 105px;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+}
+.logo {
+  float: left;
+  margin: 0px;
+}
+.login {
+  float: right;
+  margin-top: 50px;
+}
+.menubar {
+  margin-top: 30px;
+  width: 960px;
+  height: 47px;
+  border-radius: 10px;
+  background-color: #D9E4F1;
+  float: left;
+  -moz-box-shadow: 1px 1px 1px #888;
+  -webkit-box-shadow: 1px 1px 1px #888;
+  box-shadow: 1px 1px 1px #888;
+}
+.menubar ul {
+  list-style: none;
+}
+.menubar li {
+  margin: 0px;
+  padding: 0px 22px;
+  display: inline;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 47px;
+}
+.menubar a {
+  color: #093e47;
+  margin: 0px 5px;
+}
+.menubar a:hover {
+  color: #ffffff;
+}
+.bottom_header {
+  width: 960px;
+  height: 350px;
+  float: left;
+}
+.bh_left {
+  width: 471px;
+  height: 350px;
+  float: left;
+  padding: 0px 0px 0px 20px;
+}
+.bh_text {
+  float: left;
+  margin: 0px;
+  padding: 60px 0px 0px 0px;
+}
+.bh_text h2 {
+  font-size: 30px;
+  margin: 0px 0px 25px 0px;
+}
+.bh_text p {
+  font-size: 14px;
+  line-height: 32px;
+  color: #000000;
+  margin: 0px 0px 25px 0px;
+}
+.bh_btn {
+  width: 160px;
+  height: 33px;
+  background: url(/images/button-bg.jpg);
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 33px;
+  float: left;
+}
+.bh_right {
+  width: 469px;
+  height: 350px;
+  float: left;
+}
+/*Login Page Style Sheet*/
+.login_page {
+  padding: 5px 0px 100px 260px;
+  margin: 0px;
+  float: left;
+}
+.login_box {
+  width: 416px;
+  height: 264px;
+  background-color: #f1f1ee;
+  padding: 34px 0px 0px 34px;
+  margin: 0px;
+  float: left;
+  border-radius: 10px;
+}
+.user {
+  width: 384px;
+  height: 52px;
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  background-color: #FFFFFF;
+  border: 1px solid #d4d4d4;
+  float: left;
+}
+.password {
+  width: 384px;
+  height: 52px;
+  margin: 35px 0px 0px 0px;
+  padding: 0px;
+  background-color: #FFFFFF;
+  border: 1px solid #d4d4d4;
+  float: left;
+}
+.forgot_pass {
+  margin: 25px 0px 0px 0px;
+  padding: 0px;
+  font-size: 12px;
+  float: left;
+}
+.forgot_pass a {
+  color: #093e47;
+}
+.forgot_pass a:hover {
+  text-decoration: underline;
+}
+.login_bb {
+  width: 234px;
+  height: 42px;
+  float: left;
+  margin: 20px 0px 0px 80px;
+  padding: 0px;
+  background: url(/images/button-big.jpg);
+  text-align: center;
+  line-height: 39px;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+}
+.fill {
+  width: 100%;
+  height: 52px;
+  border: none;
+  font-size: 36px;
+}
+/*Login Page Style Sheet*/
