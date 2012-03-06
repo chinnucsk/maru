@@ -44,10 +44,10 @@ delete(Key) ->
 -spec is_valid(list()) -> true | false.
 is_valid(SessionID) ->
     case find({id, SessionID}) of
-        not_found ->
-            false;
         [Session] ->
-            not(expired(Session))
+            not(expired(Session));
+        _ ->
+            false                
     end.
 
 %%%===================================================================

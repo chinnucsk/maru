@@ -8,7 +8,6 @@
               maru_web_sup,
 
               maru_web_utils,
-              maru_web_static,
               maru_web_base,
 
               maru_web_sessions,

@@ -16,7 +16,6 @@
          resource_exists/2,
          process_post/2,
          to_json/2,
-         to_html/2,
          from_json/2]).
 
 -include_lib("webmachine/include/webmachine.hrl").
@@ -29,9 +28,7 @@
 %%%===================================================================
 -spec init(term()) -> {ok, record(ctx)}.
 init(_) ->
-    {ok, {priv, App}} = application:get_env(host_dir),
-    HostDir = filename:join(code:priv_dir(App), "user"),
-    {ok, #ctx{model=?MODEL, docroot=HostDir}}.
+   {ok, #ctx{model=?MODEL}}.
 
 content_types_provided(ReqData, Ctx) ->
     maru_web_base:content_types_provided(ReqData, Ctx).
@@ -69,9 +66,6 @@ to_json(ReqData, Ctx) ->
                     end
             end
     end.
-
-to_html(ReqData, Ctx) ->
-    maru_web_base:to_html(ReqData, Ctx).
 
 from_json(ReqData, Ctx) ->
     maru_web_base:from_json(ReqData, Ctx).
