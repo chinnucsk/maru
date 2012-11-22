@@ -1,1 +1,9 @@
-_build/
+.eunit
+deps
+priv
+*.o
+*.beam
+*.plt
+.erlang.cookie
+ebin
+.depsolver_plt
