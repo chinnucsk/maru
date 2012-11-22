@@ -6,7 +6,6 @@
                         maru_web_base,maru_web_sessions,maru_web_sup,
                         maru_web_utils]},
               {registered,[maru_web_sup]},
-              {applications,[kernel,stdlib,webmachine,maru_models,erlydtl,
-                             genbu_access_control]},
+              {applications,[kernel,stdlib,webmachine,maru_models,erlydtl]},
               {mod,{maru_web_app,[]}},
               {start_phases,[]}]}.
