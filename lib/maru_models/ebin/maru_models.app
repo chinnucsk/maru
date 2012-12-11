@@ -6,5 +6,5 @@
                         maru_model_users,maru_model_utils]},
               {registered,[]},
               {applications,[kernel,stdlib,maru_idioms,sasl,crypto,ossp_uuid,
-                             jiffy,bcrypt,maru_db]},
+                             jiffy,bcrypt]},
               {start_phases,[]}]}.
