@@ -7,7 +7,6 @@
 %%% Created :  5 Jul 2011 by Tristan Sloughter <>
 %%%-------------------------------------------------------------------
 -module(maru_model_users).
--extends(maru_model_base).
 
 -include_lib("maru_models/include/maru_model.hrl").
 -include_lib("maru_models/include/jsonerl.hrl").

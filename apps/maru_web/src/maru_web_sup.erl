@@ -33,36 +33,28 @@ start_link() ->
 -spec init(list()) -> {ok, {SupFlags::any(), [ChildSpec::any()]}} |
                        ignore | {error, Reason::any()}.
 init([]) ->
-    WebChild = {webmachine_mochiweb,
-                {webmachine_mochiweb, start, [config()]},
-                permanent, 5000, worker, dynamic},
-
     RestartStrategy = one_for_one,
-    MaxRestarts = 3,
-    MaxSecondsBetweenRestarts = 10,
+    MaxRestarts = 1000,
+    MaxSecondsBetweenRestarts = 3600,
+
     SupFlags = {RestartStrategy, MaxRestarts, MaxSecondsBetweenRestarts},
 
-    {ok, {SupFlags , [WebChild]}}.
+
+    Dispatch = cowboy_router:compile([
+                                     %% {HostMatch, list({PathMatch, Handler, Opts})}
+                                     {'_', [{"/health", maru_health_handler, []}
+                                           ,{"/", maru_static_handler, []}]}
+                                     ]),
+
+    ListenPort = list_to_integer(os:getenv("PORT")),
+
+    ChildSpecs = [ranch:child_spec(maru_cowboy, 100,
+                                   ranch_tcp, [{port, ListenPort}],
+                                   cowboy_protocol, [{env, [{dispatch, Dispatch}]}])],
+
+    {ok, {SupFlags, ChildSpecs}}.
 
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
 
-config() ->
-    {ok, IP} = application:get_env(webmachine_ip),
-
-    Port = os:getenv("PORT"),
-
-    {ok, App} = application:get_application(),
-    LogDir = filename:join(code:priv_dir(App), "logs"),
-
-    {ok, {priv, HostApp}} = application:get_env(host_dir),
-    HostDir = code:priv_dir(HostApp),
-    %{ok, {priv, HostApp}} = application:get_env(dispatch_file),
-    {ok, Dispatch} = file:consult(filename:join(HostDir, "dispatch")),
-
-    [{ip, IP},
-     {port, Port},
-     {log_dir, LogDir},
-     {backlog, 128},
-     {dispatch, Dispatch}].

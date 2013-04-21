@@ -18,7 +18,6 @@
          to_json/2,
          from_json/2]).
 
--include_lib("webmachine/include/webmachine.hrl").
 -include_lib("maru_web/include/maru_web.hrl").
 
 -define(MODEL, maru_model_users).
