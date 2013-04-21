@@ -6,5 +6,11 @@
    {vsn, "0.1.0"},
    {modules, []},
    {registered,[]},
-   {applications, [kernel, stdlib, maru_idioms, sasl, crypto, ossp_uuid, jiffy]},
+   {applications, [kernel
+                  ,stdlib
+                  ,sasl
+                  ,lager
+                  ,crypto
+                  ,jsx
+                  ,maru_idioms]},
    {start_phases, []}]}.

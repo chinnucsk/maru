@@ -6,5 +6,6 @@
    {vsn, "0.1.0"},
    {modules, []},
    {registered,[]},
-   {applications, [kernel, stdlib, sgte, inets]},
+   {applications, [kernel
+                  ,stdlib]},
    {start_phases, []}]}.

@@ -6,6 +6,10 @@
    {vsn, "0.1.0"},
    {modules, []},
    {registered,[maru_db_sup]},
-   {applications, [kernel, stdlib, mnesia, maru_idioms]},
+   {applications, [kernel
+                  ,stdlib
+                  ,sasl
+                  ,lager
+                  ,maru_idioms]},
    {mod, {maru_db_app,[]}},
    {start_phases, []}]}.

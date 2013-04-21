@@ -6,6 +6,12 @@
    {vsn, "0.1.0"},
    {modules, []},
    {registered,[maru_web_sup]},
-   {applications, [kernel, stdlib, webmachine, maru_models, erlydtl]}, %, genbu_access_control]},
+   {applications, [kernel
+                  ,stdlib
+                  ,sasl
+                  ,lager
+                  ,cowboy
+                  ,maru_models
+                  ,erlydtl]},
    {mod, {maru_web_app,[]}},
    {start_phases, []}]}.
