@@ -7,3 +7,7 @@ priv
 .erlang.cookie
 ebin
 .depsolver_plt
+_rel
+log
+logs
+erl_crash.dump
